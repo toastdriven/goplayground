@@ -1,16 +1,18 @@
-package main
+package queue
 
 import (
-	"fmt"
 	"math"
+	"sync"
 )
 
 type Queue struct {
 	data        []string
 	current_min int
+	lock        sync.Mutex
 }
 
 func (q *Queue) put(val string) {
+	q.lock.Lock()
 	current_length := q.length()
 	current_cap := cap(q.data)
 
@@ -22,9 +24,11 @@ func (q *Queue) put(val string) {
 	}
 
 	q.data = append(q.data, val)
+	q.lock.Unlock()
 }
 
 func (q *Queue) get() string {
+	q.lock.Lock()
 	val := q.data[q.current_min]
 	q.current_min++
 
@@ -34,6 +38,7 @@ func (q *Queue) get() string {
 		q.current_min = 0
 	}
 
+	q.lock.Unlock()
 	return val
 }
 
@@ -43,25 +48,4 @@ func (q *Queue) length() int {
 
 func (q *Queue) empty() bool {
 	return q.length() <= 0
-}
-
-func main() {
-	// Just for testing.
-	queue := Queue{}
-	fmt.Println("Len:", queue.length())
-	queue.put("Hello")
-	queue.put("World")
-	queue.put("foo")
-	fmt.Println("Len:", queue.length())
-	fmt.Println("Empty?", queue.empty())
-	first := queue.get()
-	fmt.Println("Saw:", first)
-	fmt.Println("Len:", queue.length())
-	second := queue.get()
-	fmt.Println("Saw:", second)
-	fmt.Println("Empty?", queue.empty())
-	third := queue.get()
-	fmt.Println("Saw:", third)
-	fmt.Println("Len:", queue.length())
-	fmt.Println("Empty?", queue.empty())
 }
