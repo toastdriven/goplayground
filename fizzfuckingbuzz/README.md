@@ -12,12 +12,13 @@ Usage
 package main
 
 import (
-    "github.com/toastdriven/goplayground/fizzfuckingbuzz/fizzbuzz"
+    "github.com/toastdriven/goplayground/fizzfuckingbuzz"
 )
 
 func main() {
-    FizzBuzz(100)
+    fizzbuzz.FizzBuzz(100)
 }
+
 </code>
 
 Marvel at the output. So majestic... :P
