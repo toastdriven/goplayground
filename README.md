@@ -18,3 +18,5 @@ Experiments
   simulations in the future.
 * ``fizzfuckingbuzz`` - Because I needed a simple kata to bite off & it was
   a chance to play around with ``switch``.
+* ``dictionary`` - Counts how many times **each word** is seen in a block of text
+  read from stdin. Experimenting with mappings & reading data.
