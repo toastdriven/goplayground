@@ -54,4 +54,32 @@ func TestQueue(t *testing.T) {
 	if queue.empty() != true {
 		t.Errorf("Expected empty queue, was:", queue.empty())
 	}
+
+	// Test storing non-string values.
+	mixed_queue := Queue{}
+	mixed_queue.put(1)
+	mixed_queue.put("abc")
+	mixed_queue.put(3.14159)
+
+	if mixed_queue.length() != 3 {
+		t.Errorf("Expected 3 length queue, was:", mixed_queue.length())
+	}
+
+	first_mixed := mixed_queue.get()
+
+	if first_mixed != 1 {
+		t.Errorf("Expected 1, was:", first_mixed)
+	}
+
+	second_mixed := mixed_queue.get()
+
+	if second_mixed != "abc" {
+		t.Errorf("Expected \"abc\", was:", second_mixed)
+	}
+
+	third_mixed := mixed_queue.get()
+
+	if third_mixed != 3.14159 {
+		t.Errorf("Expected 3.14159, was:", third_mixed)
+	}
 }

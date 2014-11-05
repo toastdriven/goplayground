@@ -1,7 +1,7 @@
 Ghetto Queue
 ============
 
-A simple ``Queue``. Currently only works with ``string`` types.
+A simple ``Queue``. Works with all types.
 
 
 Usage

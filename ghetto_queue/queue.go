@@ -6,19 +6,19 @@ import (
 )
 
 type Queue struct {
-	data        []string
+	data        []interface{}
 	current_min int
 	lock        sync.Mutex
 }
 
-func (q *Queue) put(val string) {
+func (q *Queue) put(val interface{}) {
 	q.lock.Lock()
 	current_length := q.length()
 	current_cap := cap(q.data)
 
 	if current_length+1 >= current_cap {
 		new_cap := int(math.Floor(float64(current_cap) * 1.25))
-		new_data := make([]string, current_length, new_cap+1)
+		new_data := make([]interface{}, current_length, new_cap+1)
 		copy(new_data, q.data)
 		q.data = new_data
 	}
@@ -27,7 +27,7 @@ func (q *Queue) put(val string) {
 	q.lock.Unlock()
 }
 
-func (q *Queue) get() string {
+func (q *Queue) get() interface{} {
 	q.lock.Lock()
 	val := q.data[q.current_min]
 	q.current_min++
